@@ -56,7 +56,7 @@ module "frontend_vm" {
   network_interface_name = "frontend_nic"
   location               = "West US"
   resource_group_name    = "todo_app_rg"
-  ip_name                = "frontend_ip"
+  ip_name                = "fronten_ip"
   virtual_machine_name   = "todoFrontendVM"
   subnet_name          = "frontend-subnet"
   virtual_network_name = "todoapp_vnet"
