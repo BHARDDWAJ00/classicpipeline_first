@@ -1,30 +1,18 @@
 trigger: none
 
-pool:
-  name: vihaan_agent_pool
+pool: vihaan_agent_pool
+ 
+steps:
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
 
-stages:
-  - stage: infracreation
-    jobs:
-      - job: initplanandapply
-        steps:
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/classicpipeline_first'
-            backendServiceArm: 'Azure subscription 1(712bfb2b-0ea5-4e2e-ae12-b849c506ebe4)'
-            backendAzureRmStorageAccountName: 'mystoagedabba'
-            backendAzureRmContainerName: 'mycontainerdabba'
-            backendAzureRmKey: 'mystate.tfstate'
-         
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'plan'
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'apply'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/classicpipeline_first'
-            environmentServiceNameAzureRM: 'Azure subscription 1(712bfb2b-0ea5-4e2e-ae12-b849c506ebe4)'
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Environment'
+    backendServiceArm: 'Azure subscription 1(712bfb2b-0ea5-4e2e-ae12-b849c506ebe4)'
+    backendAzureRmStorageAccountName: 'mystoagedabba'
+    backendAzureRmContainerName: 'mycontainerdabba'
+    backendAzureRmKey: 'mystate.tfstate'
